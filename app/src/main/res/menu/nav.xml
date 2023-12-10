@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/back"
+        android:title="Back"
+        app:cnb_backgroundColor="@color/green_300"
+        app:cnb_iconColor="@color/green_900"
+        app:cnb_textColor="@color/green_900"
+        app:cnb_iconTintMode="src_in"
+        android:icon="@drawable/ic_baseline_keyboard_arrow_left_24"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/forward"
+        android:title="Forward"
+        app:cnb_backgroundColor="@color/blue_300"
+        app:cnb_iconColor="@color/blue_900"
+        app:cnb_textColor="@color/blue_900"
+
+        app:cnb_iconTintMode="src_in"
+        android:icon="@drawable/ic_baseline_keyboard_arrow_right_24"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/downloads"
+        android:title="Download"
+        app:cnb_backgroundColor="@color/purple_300"
+        app:cnb_textColor="@color/purple_900"
+
+        app:cnb_iconColor="@color/purple_900"
+        app:cnb_iconTintMode="src_in"
+        android:icon="@drawable/ic_baseline_file_download_24"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/tab"
+        android:title="Tab"
+        app:cnb_backgroundColor="@color/pink_300"
+        app:cnb_iconColor="@color/pink_900"
+        app:cnb_iconTintMode="src_in"
+        android:visible="true"
+        app:cnb_textColor="@color/pink_900"
+
+        android:icon="@drawable/new_tab"
+        tools:ignore="HardcodedText" />
+
+    <!--    <item-->
+    <!--        android:id="@+id/location"-->
+    <!--        android:title=""-->
+    <!--        android:icon="@drawable/ic_baseline_location_on_24"-->
+    <!--        tools:ignore="HardcodedText" />-->
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        app:cnb_backgroundColor="@color/red_300"
+        app:cnb_textColor="@color/red_900"
+
+        app:cnb_iconColor="@color/red_900"
+        app:cnb_iconTintMode="src_in"
+        android:icon="@drawable/ic_baseline_home_24"
+        tools:ignore="HardcodedText" />
+
+</menu>

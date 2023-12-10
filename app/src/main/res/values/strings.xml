@@ -1,0 +1,136 @@
+<resources>
+    <string name="app_name">Video Downloader</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="AdMob_AppId">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_Native">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="adMobAppOpen">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="adMobAppOpenSplash">ca-app-pub-3940256099942544/3419835294</string>
+
+    <!--insta-->
+    <string name="dl_started" translatable="false">Download started</string>
+    <string name="downloaded" translatable="false">Media downloaded successfully</string>
+    <string name="downloading" translatable="false">"Please wait...Downloading Media"</string>
+    <string name="write_permission_msg">Write Storage permission is required to save videos and images</string>
+    <string name="yes">Yes</string>
+    <string name="permission_req">Permission Required</string>
+    <string name="instagram_not_found">Please Install Instagram First For Use This App.</string>
+
+    <string name="how_to_download_videos">How to download videos?</string>
+    <string name="share_the_video_to_aio_video_downloader_app_or">• Share the video to All Video Downloader app (or)</string>
+    <string name="simply_copy_the_link_of_any_video">• Simply copy the link of any video</string>
+    <!--tiktok-->
+    <string name="step_1">Step 1</string>
+    <string name="step_2">Step 2</string>
+    <string name="step_3">Step 3</string>
+    <string name="step_4">Step 4</string>
+    <string name="tik_server">https://tinyurl.com/3snv38ez</string>
+    <string name="tik_location">Location</string>
+    <string name="tik_not_marked">not_marked</string>
+
+    <string name="whatsapp">WhatsApp</string>
+    <string name="wa_business">WA Business</string>
+    <string name="instagram">Instagram</string>
+    <string name="tiktok">Tiktok</string>
+    <string name="likee">Likee</string>
+    <string name="fb">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="gallery">Gallery</string>
+    <string name="vimeo">Vimeo</string>
+    <string name="recent_status">Recent status</string>
+    <string name="help">Help</string>
+    <string name="snackvideo">SnackVideo</string>
+    <string name="sharechat">ShareChat</string>
+    <string name="roposo">Roposo</string>
+    <string name="chingari">Chingari</string>
+    <string name="moj">Moj</string>
+    <string name="mx_takatak">MX TakaTak</string>
+    <string name="mx_takatak_server">https://takatak.katarmal.in/v1/processUrl</string>
+    <string name="invalid">Invalid URL!!!</string>
+    <string name="mitron">Mitron</string>
+    <string name="zili">Zili</string>
+    <string name="video">Videos</string>
+    <string name="download">Downloads</string>
+    <string name="enter_url">Enter Url</string>
+    <string name="no_video_msg">Please go to <b>video detail page</b> to <b>play video first</b>, and the download button will be available after Video Downloader detects the video.</string>
+
+    <string-array name="videourl_filters">
+        <item>mp4</item>
+        <item>video</item>
+        <item>googleusercontent</item>
+        <item>embed</item>
+    </string-array>
+    <string-array name="blocked_sites">
+        <item>youtube.com</item>
+    </string-array>
+
+
+
+    <string name="all_videos">All Videos</string>
+    <string name="all_folders">All Folders</string>
+    <string name="total_videos">Total Videos:</string>
+    <string name="total_folders">Total Folders:</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="feedback">Feedback</string>
+    <string name="themes">Themes</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="nav_text">Welcome to World of Entertainment!!</string>
+    <string name="video_name">Video Name</string>
+    <string name="folder_name">Folder Name</string>
+    <string name="duration">00:00</string>
+    <string name="image">Image</string>
+    <string name="loading">Loading..</string>
+    <string name="semi_colon">:</string>
+    <string name="lock">Lock Button</string>
+    <string name="back_btn">Back Button</string>
+    <string name="menu">Menu</string>
+    <string name="prev_btn">Previous Button</string>
+    <string name="next_btn">Next Button</string>
+    <string name="repeat_btn">Repeat Button</string>
+    <string name="fullscreen_btn">Fullscreen Button</string>
+    <string name="play_btn">Play Button</string>
+    //for menu
+    <string name="audio_track">Audio Track</string>
+    <string name="subtitles">Subtitles</string>
+    <string name="booster">Booster</string>
+    <string name="speed">Speed</string>
+    <string name="sleep_timer">Sleep Timer</string>
+    <string name="pip_mode">PIP Mode</string>
+    <string name="search">Search</string>
+
+    <!--strings for video more features-->
+    <string name="rename">Rename </string>
+    <string name="delete">Delete</string>
+    <string name="info">Info</string>
+    <string name="share">Share</string>
+    <string name="orientation">Orientation</string>
+    <string name="O">0</string>
+    <string name="apply_to_all">Apply To All Upcoming Videos</string>
+
+    <!-- strings for online playing features-->
+    <string name="add_link">Paste Link</string>
+    <string name="play">Play Video</string>
+    <string name="play_online">Play Online</string>
+    <string name="youtube">Youtube</string>
+    <string name="no_result_found">No data Found</string>
+    <string name="grant_whatsapp_business_permission">Grant WhatsApp Business Permission</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="saved">Saved</string>
+    <string name="refre">Refreshed!</string>
+    <string name="pernecessory">Permission necessary</string>
+    <string name="write_neesory">Write Storage permission is necessary to Download Images and Videos!!!</string>
+    <string name="stor_saver">Satus</string>
+    <string name="no_history">No Any History Found</string>
+    <string name="copy_url">Copy URL</string>
+    <string name="history">History</string>
+    <string name="Favourites">Favourites</string>
+    <string name="no_bookmark">No Any Favourites Saved</string>
+    <string name="Tiktok">Tiktok</string>
+    <string name="ad">Ad</string>
+    <string name="ads_loading">Ads Loading</string>
+</resources>
