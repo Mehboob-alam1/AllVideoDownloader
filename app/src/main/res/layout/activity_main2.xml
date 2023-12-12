@@ -49,6 +49,7 @@
         android:drawableLeft="@drawable/download"
         android:paddingLeft="30dp"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:id="@+id/download"
         />
 

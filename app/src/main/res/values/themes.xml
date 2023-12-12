@@ -12,8 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/custom_font</item>
+
+
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MyToolBarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:tint">@color/white</item>
+    </style>
+
 
     <!-- Tab theme. -->
     <style name="TabAppearance" parent="TextAppearance.Design.Tab">

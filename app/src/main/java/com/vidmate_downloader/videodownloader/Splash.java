@@ -7,16 +7,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.vidmate_downloader.videodownloader.tiktok.HistoryBookMarkSQLite;
 
 public class Splash extends AppCompatActivity {
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,14 @@ public class Splash extends AppCompatActivity {
         HistoryBookMarkSQLite db = new HistoryBookMarkSQLite(Splash.this);
           db.clearTabs2();
            db.close();
+
+         ImageView imageView = findViewById(R.id.logo);
+
+         TextView textView = findViewById(R.id.txtAppName);
+        Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.expand_in);
+        imageView.startAnimation(slideAnimation);
+        Animation slideTextAnimation = AnimationUtils.loadAnimation(this, R.anim.expand_in);
+        textView.startAnimation(slideAnimation);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

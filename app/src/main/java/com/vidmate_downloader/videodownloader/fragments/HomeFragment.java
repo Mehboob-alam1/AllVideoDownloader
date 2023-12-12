@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Patterns;
@@ -77,29 +79,49 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     View v;
     RelativeLayout vLayout;
     Activity activity;
-    ImageView instagram,titkok,snapchat,fb;
+    ImageView instagram, titkok, snapchat, fb;
     MyDatabase database;
     EditText searchTxt;
     WebFragment webFragment;
+
     public interface OnDataPass {
         public void onDataPass(String data);
     }
+
     OnDataPass dataPasser;
+    CardView instagramCard;
+    CardView
+            facebookCard;
+    CardView
+            twitterCard;
+    CardView
+            tiktokCard;
+
+    CardView
+            pinterestCard;
+    CardView
+            whatsappCard;
+    CardView
+            wallpaperCard;
+    CardView
+            familyCard;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         dataPasser = (OnDataPass) context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v =  inflater.inflate(R.layout.fragment_home, container, false);
-        activity = (Activity)getContext();
+        v = inflater.inflate(R.layout.fragment_home, container, false);
+        activity = (Activity) getContext();
         database = new MyDatabase(activity);
         searchTxt = v.findViewById(R.id.searchTxt);
         vLayout = v.findViewById(R.id.vLayout);
@@ -108,12 +130,30 @@ public class HomeFragment extends Fragment {
         snapchat = v.findViewById(R.id.snapchat);
         fb = v.findViewById(R.id.facebook);
 
+        instagramCard = v.findViewById(R.id.cardInstagram);
+        facebookCard = v.findViewById(R.id.cardFacebook);
+        twitterCard = v.findViewById(R.id.cardTwitter);
+        tiktokCard = v.findViewById(R.id.cardTikTok);
+        pinterestCard = v.findViewById(R.id.cardPinterest);
+        whatsappCard = v.findViewById(R.id.cardWhatsapp);
+        wallpaperCard = v.findViewById(R.id.cardWallpaper);
+        familyCard = v.findViewById(R.id.cardFamilyApps);
+
+        instagramCard.setOnClickListener(v -> selectCard(instagramCard));
+        facebookCard.setOnClickListener(v -> selectCard(facebookCard));
+        twitterCard.setOnClickListener(v -> selectCard(twitterCard));
+        tiktokCard.setOnClickListener(v -> selectCard(tiktokCard));
+        pinterestCard.setOnClickListener(v -> selectCard(pinterestCard));
+        whatsappCard.setOnClickListener(v -> selectCard(whatsappCard));
+        wallpaperCard.setOnClickListener(v -> selectCard(wallpaperCard));
+        familyCard.setOnClickListener(v -> selectCard(facebookCard));
+
         instagram.setOnClickListener(v -> startActivity(new Intent(activity, InstagramActivity.class)));
         titkok.setOnClickListener(v -> startActivity(new Intent(activity, TiktokActivity.class)));
         snapchat.setOnClickListener(v -> startActivity(new Intent(activity, TwitterActivity.class)));
         fb.setOnClickListener(v ->
                 startActivity(new Intent(activity, WebActivity.class)
-                .putExtra("url","https://www.facebook.com/")));
+                        .putExtra("url", "https://www.facebook.com/")));
 
         v.findViewById(R.id.whatsapp).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +165,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(activity, WebActivity.class)
-                        .putExtra("url","https://unsplash.com/wallpapers"));
+                        .putExtra("url", "https://unsplash.com/wallpapers"));
             }
         });
         v.findViewById(R.id.tv_guide).setOnClickListener(new View.OnClickListener() {
@@ -141,14 +181,43 @@ public class HomeFragment extends Fragment {
             }
             return false;
         });
-        ShimmerTextView shimmerTextView=v.findViewById(R.id.largeBannerShimmer);
-        Shimmer shimmer=new Shimmer();
+        ShimmerTextView shimmerTextView = v.findViewById(R.id.largeBannerShimmer);
+        Shimmer shimmer = new Shimmer();
         shimmer.start(shimmerTextView);
-        Utils.loadNativeAdAdMob(v.findViewById(R.id.largeBannerShimmer),getString(R.string.admob_Native),R.layout.google_native_large,activity, v.findViewById(R.id.framelayout)
-        ,shimmerTextView);
-       // Utils.BannerAd(v.findViewById(R.id.framelayout),getActivity());
+        Utils.loadNativeAdAdMob(v.findViewById(R.id.largeBannerShimmer), getString(R.string.admob_Native), R.layout.google_native_large, activity, v.findViewById(R.id.framelayout)
+                , shimmerTextView);
+        // Utils.BannerAd(v.findViewById(R.id.framelayout),getActivity());
         return v;
     }
+
+    private void selectCard(CardView card) {
+        // Reset the background for all cards
+        resetCardBackground();
+
+        // Set the background for the selected card
+        card.setCardBackgroundColor(Color.parseColor("#FF5733")); // Change to your desired color
+    }
+
+    private void resetCardBackground() {
+        // Reset the background for all cards
+
+
+        facebookCard.setCardBackgroundColor(Color.WHITE);
+
+        twitterCard.setCardBackgroundColor(Color.WHITE);
+
+        instagramCard.setCardBackgroundColor(Color.WHITE);
+                facebookCard.setCardBackgroundColor(Color.WHITE);
+        twitterCard.setCardBackgroundColor(Color.WHITE);
+                tiktokCard.setCardBackgroundColor(Color.WHITE);
+        pinterestCard.setCardBackgroundColor(Color.WHITE);
+                whatsappCard.setCardBackgroundColor(Color.WHITE);
+        wallpaperCard.setCardBackgroundColor(Color.WHITE);
+                familyCard.setCardBackgroundColor(Color.WHITE);
+
+        // ... Repeat the process for other cards
+    }
+
     private void performSearch() {
         searchTxt.clearFocus();
         InputMethodManager in = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -165,7 +234,7 @@ public class HomeFragment extends Fragment {
             //this url well open in web view as google search
             url = "https://www.google.com/search?q=" + s.replace(" ", "%20");
         }
-      //  startActivity(new Intent(activity, WebActivity.class).putExtra("url",url));
+        //  startActivity(new Intent(activity, WebActivity.class).putExtra("url",url));
 /*        Bundle bundle = new Bundle();
         bundle.putString("url",url);
         webFragment=new WebFragment();
@@ -174,6 +243,7 @@ public class HomeFragment extends Fragment {
                 .addToBackStack("WebFragment").commit();*/
         passData(url);
     }
+
     private void showGuide() {
         final Dialog guide = new Dialog(activity);
         guide.setContentView(R.layout.dialog_guide2);
@@ -188,6 +258,7 @@ public class HomeFragment extends Fragment {
 
         guide.show();
     }
+
     public void passData(String data) {
         dataPasser.onDataPass(data);
     }

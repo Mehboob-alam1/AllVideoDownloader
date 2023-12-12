@@ -4,6 +4,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -47,6 +48,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import nl.joery.animatedbottombar.AnimatedBottomBar;
+import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
+
 public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
 
     ImageView homeImg, tabImg, downloadImg, personImg;
@@ -55,7 +59,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
     CardView downloadsTo;
     Activity activity;
     Fragment selectedFragment = null;
-    ChipNavigationBar bottomNav;
+    AnimatedBottomBar bottomNav;
     public static ArrayList<Video> videoList=new ArrayList<>();
     public static ArrayList<Folder> folderList=new ArrayList<>();
 
@@ -74,7 +78,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
             MediaStore.Video.Media.SIZE + " DESC"
     );
     public static Integer sortValue= 0;
-    DrawerLayout draw;
+    DuoDrawerLayout draw;
     WebFragment webFragment;
     @Override
     public void onDataPass(String data) {
@@ -97,9 +101,10 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        draw = findViewById(R.id.draw);
-        bottomNav = findViewById(R.id.bottomNav);
-        bottomNav.setOnItemSelectedListener(selectedListener);
+        draw =(DuoDrawerLayout) findViewById(R.id.draw);
+        bottomNav = findViewById(R.id.bottom_bar);
+
+        bottomNav.setOnTabSelectListener(tabSelectListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
                 new HomeFragment()).commit();
         if (!checkPermissions(this, permissionsList)) {
@@ -194,58 +199,85 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
         });
     }
 
+    private final AnimatedBottomBar.OnTabSelectListener tabSelectListener= new AnimatedBottomBar.OnTabSelectListener() {
+        @Override
+        public void onTabSelected(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab item) {
+            switch (item.getId()) {
+                case R.id.home:
+                    if (webFragment!=null){
+                        if (webFragment.HomeClick()){
+
+                        }
+                    }
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.home);
+                    break;
+                case R.id.tab:
+
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.tab);
+                    break;
+
+
+                case R.id.downloads:
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.downloads);
+                    break;
+            }
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
+                        selectedFragment).commit();
+            }
+        }
+
+        @Override
+        public void onTabReselected(int i, @NonNull AnimatedBottomBar.Tab tab) {
+
+        }
+    };
     @SuppressLint("NonConstantResourceId")
-    private final ChipNavigationBar.OnItemSelectedListener selectedListener =
-            item -> {
-                switch (item) {
-                    case R.id.home:
-                        if (webFragment!=null){
-                            if (webFragment.HomeClick()){
+    private final AnimatedBottomBar.OnTabInterceptListener setItemSelected = new AnimatedBottomBar.OnTabInterceptListener() {
+        @Override
+        public boolean onTabIntercepted(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab item) {
 
-                            }
-                        }
-                        ClearBack();
-                        getSupportActionBar().show();
-                        selectFragment(getSupportFragmentManager(), R.id.home);
-                        break;
-                    case R.id.tab:
+            switch (item.getId()) {
+                case R.id.home:
+                    if (webFragment!=null){
+                        if (webFragment.HomeClick()){
 
-                        ClearBack();
-                        getSupportActionBar().show();
-                        selectFragment(getSupportFragmentManager(), R.id.tab);
-                        break;
-                    case R.id.back:
-                        if (webFragment!=null){
-                            if (!webFragment.BackCheck()){
-                                ClearBack();
-                            }
-                        }else {
-                            ClearBack();
                         }
-                       // ClearBack();
-                        break;
-                    case R.id.forward:
-                        if (webFragment!=null){
-                            if (!webFragment.ForwardCheck()){
-                                ClearBack();
-                            }
-                        }else {
-                            ClearBack();
-                        }
-                       // ClearBack();
-                        break;
-                    case R.id.downloads:
-                        ClearBack();
-                        getSupportActionBar().show();
-                        selectFragment(getSupportFragmentManager(), R.id.downloads);
-                        break;
-                }
-                if (selectedFragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
-                            selectedFragment).commit();
-                }
-//                return true;
-            };
+                    }
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.home);
+                    break;
+                case R.id.tab:
+
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.tab);
+                    break;
+
+
+                    // ClearBack();
+
+                case R.id.downloads:
+                    ClearBack();
+                    getSupportActionBar().show();
+                    selectFragment(getSupportFragmentManager(), R.id.downloads);
+                    break;
+            }
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
+                        selectedFragment).commit();
+            }
+            return false;
+        }
+    };
+
     private void ClearBack() {
         webFragment=null;
         findViewById(R.id.ivBookMark).setVisibility(View.GONE);
@@ -278,7 +310,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
 
     @Override
     public void onBackPressed() {
-        if (bottomNav.getSelectedItemId()==R.id.home){
+        if (bottomNav.getId()==R.id.home){
             int count = getSupportFragmentManager().getBackStackEntryCount();
             if (count == 0) {
                 finish();
@@ -292,7 +324,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
                         .replace(R.id.containerV, new HomeFragment())
                         .commit();
                 findViewById(R.id.ivBookMark).setVisibility(View.GONE);
-                bottomNav.setItemSelected(R.id.home,true);
+            bottomNav.selectTabById(R.id.home,true);
             } else {
                 getSupportFragmentManager().popBackStack();
             }
@@ -393,6 +425,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dot_menu,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
