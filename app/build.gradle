@@ -26,9 +26,12 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
     //for ViewBinding
-    buildFeatures{
-        viewBinding true
+    viewBinding{
+        enabled =true
     }
+//    buildFeatures{
+//        viewBinding true
+//    }
 }
 
 dependencies {
@@ -64,7 +67,8 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:6.2.0'
 
-    implementation 'nl.joery.animatedbottombar:library:1.1.0'
+    implementation 'com.etebarian:meow-bottom-navigation:1.2.0'
+
 
 
 }

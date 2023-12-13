@@ -28,7 +28,7 @@
     <!--        tools:ignore="HardcodedText" />-->
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/nav_home"
         android:title="Home"
 
         android:icon="@drawable/ic_baseline_home_24"

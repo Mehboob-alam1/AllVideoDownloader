@@ -4,40 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     tools:context=".fragments.HomeFragment">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/searchLay"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="15dp"
-        app:cardBackgroundColor="@color/search_bg"
-        app:cardCornerRadius="@dimen/_100sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="15dp">
+        android:layout_height="@dimen/_100sdp"
+        android:background="@drawable/bg_back_upper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/searchTxt"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/searchLay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawablePadding="10dp"
-            android:ellipsize="end"
-            android:hint="Search or Enter URL"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="10dp"
-            android:scrollHorizontally="true"
-            android:selectAllOnFocus="true"
-            android:textSize="14sp" />
-    </androidx.cardview.widget.CardView>
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="@color/search_bg"
+            app:cardCornerRadius="@dimen/_100sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="15dp">
+
+            <EditText
+                android:id="@+id/searchTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:hint="Search or Enter URL"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:scrollHorizontally="true"
+                android:selectAllOnFocus="true"
+                android:textSize="14sp" />
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <RelativeLayout
         android:id="@+id/vLayout"
@@ -45,12 +57,13 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
 
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_card_back"
         android:padding="@dimen/_16sdp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchLay">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -80,8 +93,8 @@
                     android:weightSum="8">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_70sdp"
                         android:id="@+id/cardInstagram"
+                        android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
                         app:cardCornerRadius="@dimen/_30sdp"
@@ -119,9 +132,9 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFacebook"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
-                        android:id="@+id/cardFacebook"
                         android:layout_margin="5dp"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
@@ -159,10 +172,10 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardTwitter"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
-                        android:id="@+id/cardTwitter"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
 
@@ -199,10 +212,10 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardTikTok"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
-                        android:id="@+id/cardTikTok"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
 
@@ -241,10 +254,10 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardPinterest"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
-                        android:id="@+id/cardPinterest"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
 
@@ -282,9 +295,9 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardWhatsapp"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
-                        android:id="@+id/cardWhatsapp"
                         android:layout_margin="5dp"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
@@ -322,10 +335,10 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardWallpaper"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
-                        android:id="@+id/cardWallpaper"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
 
@@ -363,10 +376,10 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFamilyApps"
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="5dp"
-                        android:id="@+id/cardFamilyApps"
                         app:cardCornerRadius="@dimen/_30sdp"
                         app:cardElevation="@dimen/_5sdp">
 

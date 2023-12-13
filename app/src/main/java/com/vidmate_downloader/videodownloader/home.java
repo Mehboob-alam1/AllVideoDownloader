@@ -33,11 +33,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.vidmate_downloader.videodownloader.Model.Folder;
 import com.vidmate_downloader.videodownloader.Model.Video;
 import com.vidmate_downloader.videodownloader.activities.HistoryActivity;
 import com.vidmate_downloader.videodownloader.activities.WebFragment;
+import com.vidmate_downloader.videodownloader.databinding.ActivityHomeBinding;
 import com.vidmate_downloader.videodownloader.fragments.DownloadFragment;
 import com.vidmate_downloader.videodownloader.fragments.HomeFragment;
 import com.vidmate_downloader.videodownloader.fragments.TabsFragment;
@@ -48,8 +50,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import nl.joery.animatedbottombar.AnimatedBottomBar;
+import kotlin.Unit;
+
+
+import kotlin.jvm.functions.Function1;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
+
 
 public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
 
@@ -59,7 +65,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
     CardView downloadsTo;
     Activity activity;
     Fragment selectedFragment = null;
-    AnimatedBottomBar bottomNav;
+
     public static ArrayList<Video> videoList=new ArrayList<>();
     public static ArrayList<Folder> folderList=new ArrayList<>();
 
@@ -91,10 +97,13 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
     }
 
     Toolbar toolbar;
+
+    private ActivityHomeBinding  binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding=ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         activity = this;
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
@@ -102,9 +111,88 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         draw =(DuoDrawerLayout) findViewById(R.id.draw);
-        bottomNav = findViewById(R.id.bottom_bar);
+//        bottomNav = findViewById(R.id.bottom_bar);
 
-        bottomNav.setOnTabSelectListener(tabSelectListener);
+//        binding.bottomBar.add(MeowBottomNavigation.Model(1, R.drawable.ic_home));
+
+        binding.bottomBar.add(new MeowBottomNavigation.Model(R.id.downloads,R.drawable.ic_baseline_file_download_24));
+        binding.bottomBar.add(new MeowBottomNavigation.Model(R.id.tab,R.drawable.new_tab));
+        binding.bottomBar.add(new MeowBottomNavigation.Model(R.id.nav_home,R.drawable.ic_baseline_home_24));
+
+
+                binding.bottomBar.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+                    @Override
+                    public Unit invoke(MeowBottomNavigation.Model model) {
+                        switch (model.getId()) {
+                            case R.id.nav_home:
+                                if (webFragment!=null){
+                                    if (webFragment.HomeClick()){
+
+                                    }
+                                }
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.nav_home);
+                                break;
+                            case R.id.tab:
+
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.tab);
+                                break;
+
+
+                            case R.id.downloads:
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.downloads);
+                                break;
+                        }
+                        if (selectedFragment != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
+                                    selectedFragment).commit();
+                        }
+
+                        return null;
+                    }
+                });
+
+                binding.bottomBar.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+                    @Override
+                    public Unit invoke(MeowBottomNavigation.Model model) {
+
+                        switch (model.getId()) {
+                            case R.id.nav_home:
+                                if (webFragment!=null){
+                                    if (webFragment.HomeClick()){
+
+                                    }
+                                }
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.nav_home);
+                                break;
+                            case R.id.tab:
+
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.tab);
+                                break;
+
+
+                            case R.id.downloads:
+                                ClearBack();
+                                getSupportActionBar().show();
+                                selectFragment(getSupportFragmentManager(), R.id.downloads);
+                                break;
+                        }
+                        if (selectedFragment != null) {
+                            getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
+                                    selectedFragment).commit();
+                        }
+                        return null;
+                    }
+                });
         getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
                 new HomeFragment()).commit();
         if (!checkPermissions(this, permissionsList)) {
@@ -199,84 +287,46 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
         });
     }
 
-    private final AnimatedBottomBar.OnTabSelectListener tabSelectListener= new AnimatedBottomBar.OnTabSelectListener() {
-        @Override
-        public void onTabSelected(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab item) {
-            switch (item.getId()) {
-                case R.id.home:
-                    if (webFragment!=null){
-                        if (webFragment.HomeClick()){
+//    private final CurvedBottomNavigationView.OnTabSelectListener tabSelectListener= new AnimatedBottomBar.OnTabSelectListener() {
+//        @Override
+//        public void onTabSelected(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab item) {
+//            switch (item.getId()) {
+//                case R.id.home:
+//                    if (webFragment!=null){
+//                        if (webFragment.HomeClick()){
+//
+//                        }
+//                    }
+//                    ClearBack();
+//                    getSupportActionBar().show();
+//                    selectFragment(getSupportFragmentManager(), R.id.home);
+//                    break;
+//                case R.id.tab:
+//
+//                    ClearBack();
+//                    getSupportActionBar().show();
+//                    selectFragment(getSupportFragmentManager(), R.id.tab);
+//                    break;
+//
+//
+//                case R.id.downloads:
+//                    ClearBack();
+//                    getSupportActionBar().show();
+//                    selectFragment(getSupportFragmentManager(), R.id.downloads);
+//                    break;
+//            }
+//            if (selectedFragment != null) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
+//                        selectedFragment).commit();
+//            }
+//        }
+//
+//        @Override
+//        public void onTabReselected(int i, @NonNull AnimatedBottomBar.Tab tab) {
+//
+//        }
+//    };
 
-                        }
-                    }
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.home);
-                    break;
-                case R.id.tab:
-
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.tab);
-                    break;
-
-
-                case R.id.downloads:
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.downloads);
-                    break;
-            }
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
-                        selectedFragment).commit();
-            }
-        }
-
-        @Override
-        public void onTabReselected(int i, @NonNull AnimatedBottomBar.Tab tab) {
-
-        }
-    };
-    @SuppressLint("NonConstantResourceId")
-    private final AnimatedBottomBar.OnTabInterceptListener setItemSelected = new AnimatedBottomBar.OnTabInterceptListener() {
-        @Override
-        public boolean onTabIntercepted(int i, @Nullable AnimatedBottomBar.Tab tab, int i1, @NonNull AnimatedBottomBar.Tab item) {
-
-            switch (item.getId()) {
-                case R.id.home:
-                    if (webFragment!=null){
-                        if (webFragment.HomeClick()){
-
-                        }
-                    }
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.home);
-                    break;
-                case R.id.tab:
-
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.tab);
-                    break;
-
-
-                    // ClearBack();
-
-                case R.id.downloads:
-                    ClearBack();
-                    getSupportActionBar().show();
-                    selectFragment(getSupportFragmentManager(), R.id.downloads);
-                    break;
-            }
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.containerV,
-                        selectedFragment).commit();
-            }
-            return false;
-        }
-    };
 
     private void ClearBack() {
         webFragment=null;
@@ -290,7 +340,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
     public static void selectFragment(FragmentManager fragmentManager, int itemId) {
         Fragment fragment = null;
         switch (itemId) {
-            case R.id.home:
+            case R.id.nav_home:
                 fragment = new HomeFragment();
                 break;
             case R.id.tab:
@@ -310,7 +360,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
 
     @Override
     public void onBackPressed() {
-        if (bottomNav.getId()==R.id.home){
+        if (binding.bottomBar.getId()==R.id.nav_home){
             int count = getSupportFragmentManager().getBackStackEntryCount();
             if (count == 0) {
                 finish();
@@ -324,7 +374,7 @@ public class home extends AppCompatActivity implements HomeFragment.OnDataPass {
                         .replace(R.id.containerV, new HomeFragment())
                         .commit();
                 findViewById(R.id.ivBookMark).setVisibility(View.GONE);
-            bottomNav.selectTabById(R.id.home,true);
+            binding.bottomBar.setBottom(R.id.nav_home);
             } else {
                 getSupportFragmentManager().popBackStack();
             }

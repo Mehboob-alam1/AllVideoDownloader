@@ -11,7 +11,8 @@ dependencyResolutionManagement {
         google()
         maven { url 'https://jitpack.io' }
         mavenCentral()
-        jcenter() // W
+        jcenter()
+
     }
 }
 rootProject.name = "AllVideoDownloader"
